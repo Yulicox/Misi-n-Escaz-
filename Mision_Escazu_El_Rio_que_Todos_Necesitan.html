@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Misión Escazú</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#eaf2ed;color:#26352f}
+#game{max-width:760px;margin:auto;min-height:100vh;background:#fffdf8}
+header{padding:16px 20px;background:#315b4d;color:#fff;display:flex;justify-content:space-between}
+.screen{display:none;padding:28px 20px 42px}.active{display:block}
+.cover{min-height:calc(100vh - 58px);background:linear-gradient(150deg,#e5f1e8,#f8f0dc);padding-top:90px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:2px;font-weight:bold;color:#a97928}
+h1{font-size:clamp(38px,9vw,64px);line-height:.95;color:#315b4d;margin:12px 0}
+h2{font-size:32px;color:#315b4d}
+p{font-size:17px;line-height:1.6}
+.story,.feedback{background:#eef5f0;border-radius:14px;padding:16px;margin:18px 0}
+.bad{background:#fff0ed}
+.btn,.choice{font:inherit;border-radius:12px;padding:14px 18px;cursor:pointer}
+.btn{border:0;background:#315b4d;color:white;font-weight:bold;margin:5px 3px}
+.secondary{background:white;color:#315b4d;border:2px solid #315b4d}
+.choice{width:100%;text-align:left;background:white;border:2px solid #d4ded8;margin:7px 0;line-height:1.45}
+.choice.correct{background:#e6f4ea;border-color:#4b8b61}
+.choice.wrong{background:#fae8e5;border-color:#b65e55}
+.progress{height:7px;background:#dce5df;border-radius:20px;overflow:hidden;margin:15px 0 22px}
+.progress div{height:100%;background:#b17f2a}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:white;border:1px solid #d8e1db;border-radius:14px;padding:16px}
+.card b{display:block;color:#315b4d;margin-bottom:6px}
+@media(max-width:560px){.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="game">
+<header><b>🌎 MISIÓN ESCAZÚ</b><span id="counter">Inicio</span></header>
+
+<section id="s0" class="screen active cover">
+<div class="eyebrow">Experiencia interactiva</div>
+<h1>El río que todos necesitan</h1>
+<p>Una comunidad necesita ayuda para enfrentar una situación ambiental. Tu misión será descubrir qué derechos están involucrados y qué caminos puede seguir la comunidad.</p>
+<button class="btn" onclick="go(1)">▶ COMENZAR</button>
+</section>
+
+<section id="s1" class="screen">
+<div class="eyebrow">La historia</div><h2>Una decisión que afecta al territorio</h2>
+<div class="story">
+<p>En una comunidad se anuncia un proyecto que podría generar impactos ambientales.</p>
+<p>Algunas personas quieren saber qué se realizará. Otras quieren expresar sus opiniones antes de que se tome una decisión. También hay quienes consideran que sus derechos no fueron respetados.</p>
+<p>Además, una persona que ha defendido el río comienza a sentirse amenazada.</p>
+</div>
+<p><b>Necesitamos tu ayuda.</b> Supera cuatro retos y descubre cómo se relacionan con el Acuerdo de Escazú.</p>
+<button class="btn" onclick="go(2)">INICIAR RETO 1 →</button>
+</section>
+
+<section id="s2" class="screen">
+<div class="progress"><div style="width:25%"></div></div>
+<div class="eyebrow">Reto 1 · Información</div><h2>👁️ Encuentra la información</h2>
+<p>La comunidad necesita conocer qué impactos podría generar el proyecto para comprender lo que está ocurriendo y poder participar de manera significativa.</p>
+<p><b>¿Qué derecho está directamente relacionado?</b></p>
+<div id="q2"></div><div id="f2"></div>
+</section>
+
+<section id="s3" class="screen">
+<div class="progress"><div style="width:50%"></div></div>
+<div class="eyebrow">Reto 2 · Participación</div><h2>🗣️ Haz escuchar a la comunidad</h2>
+<p>La comunidad ya conoce información sobre el proyecto y quiere expresar sus preocupaciones, conocimientos y opiniones antes de una decisión ambiental.</p>
+<p><b>¿Qué camino corresponde?</b></p>
+<div id="q3"></div><div id="f3"></div>
+</section>
+
+<section id="s4" class="screen">
+<div class="progress"><div style="width:75%"></div></div>
+<div class="eyebrow">Reto 3 · Justicia</div><h2>⚖️ ¿Y si no respetan sus derechos?</h2>
+<p>La comunidad intentó acceder a información y participar, pero considera que sus derechos de acceso no fueron respetados.</p>
+<p><b>¿Qué camino contempla Escazú?</b></p>
+<div id="q4"></div><div id="f4"></div>
+</section>
+
+<section id="s5" class="screen">
+<div class="progress"><div style="width:92%"></div></div>
+<div class="eyebrow">Reto 4 · Defensores ambientales</div><h2>🛡️ Protege a quien protege</h2>
+<p>Una persona de la comunidad ha participado en la defensa del río y comienza a recibir amenazas.</p>
+<p><b>¿Por qué esta situación se relaciona con Escazú?</b></p>
+<div id="q5"></div><div id="f5"></div>
+</section>
+
+<section id="s6" class="screen">
+<div class="eyebrow">Misión completada</div><h2>🎉 ¡Lo lograste!</h2>
+<p><b style="font-size:26px;color:#315b4d">4 retos superados</b></p>
+<p>Has recorrido los principales componentes trabajados en el material:</p>
+<div class="cards">
+<div class="card"><b>👁️ INFORMACIÓN</b>Conocer lo que sucede en el entorno.</div>
+<div class="card"><b>🗣️ PARTICIPACIÓN</b>Intervenir en procesos de decisión ambiental.</div>
+<div class="card"><b>⚖️ JUSTICIA</b>Buscar protección cuando los derechos de acceso son vulnerados.</div>
+<div class="card"><b>🛡️ PROTECCIÓN</b>Reconocer y proteger a quienes defienden el ambiente.</div>
+</div>
+<p><b>Pero la misión todavía tiene una última pregunta...</b></p>
+<button class="btn" onclick="go(7)">🌱 CONTINUAR</button>
+</section>
+
+<section id="s7" class="screen">
+<div class="eyebrow">Reto final</div><h2>🌱 ¿Qué harías tú?</h2>
+<p>Imagina que mañana aparece en tu comunidad un proyecto que puede afectar un ecosistema cercano.</p>
+<p><b>¿Cuál de estas acciones considerarías?</b></p>
+<button class="choice" onclick="finalChoice('info')">👁️ Buscar información para comprender la situación.</button>
+<button class="choice" onclick="finalChoice('part')">🗣️ Buscar espacios para participar.</button>
+<button class="choice" onclick="finalChoice('justice')">⚖️ Conocer mecanismos para proteger los derechos.</button>
+<button class="choice" onclick="finalChoice('protect')">🛡️ Prestar atención a la seguridad de quienes defienden el territorio.</button>
+<div id="final"></div>
+<button id="restart" class="btn secondary" style="display:none" onclick="restart()">↻ JUGAR DE NUEVO</button>
+</section>
+</div>
+
+<script>
+const data={
+2:{a:["Acceso a la información ambiental","Derecho a la recreación","Derecho a la movilidad","Derecho a la propiedad privada"],c:0,n:3,t:"El acceso a la información ambiental es uno de los tres pilares de la democracia ambiental y permite conocer lo que sucede en el entorno y participar de manera significativa."},
+3:{a:["Ignorar el proyecto","Participación pública","Ocultar la información","Dejar que solamente una persona decida"],c:1,n:4,t:"La participación pública permite intervenir en procesos de toma de decisiones relacionadas con el ambiente. La información y la participación están estrechamente relacionadas."},
+4:{a:["Dejar de participar","Ignorar la situación","Acceso a la justicia en asuntos ambientales","Difundir rumores"],c:2,n:5,t:"El acceso a la justicia en asuntos ambientales es el tercer pilar de la democracia ambiental presentado en el documento."},
+5:{a:["El Acuerdo contempla disposiciones específicas para proteger a las personas defensoras de derechos humanos en asuntos ambientales.","Solamente las autoridades pueden defender el ambiente.","La comunidad debe abandonar el territorio.","La participación deja de ser necesaria."],c:0,n:6,t:"El material presenta la protección de las personas defensoras ambientales como un nuevo pilar de la democracia ambiental y explica que existe un régimen específico de protección."}
+};
+function go(n){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById("s"+n).classList.add("active");document.getElementById("counter").textContent=n===0?"Inicio":n===6?"Completada":n===7?"Reflexión":"Reto "+(n-1)+" de 4";window.scrollTo(0,0);if(data[n])render(n)}
+function render(n){let d=data[n],q=document.getElementById("q"+n),f=document.getElementById("f"+n);f.innerHTML="";q.innerHTML=d.a.map((x,i)=>'<button class="choice" onclick="answer('+n+','+i+',this)">'+String.fromCharCode(65+i)+". "+x+"</button>").join("")}
+function answer(n,i,e){let d=data[n],bs=document.querySelectorAll("#q"+n+" .choice");bs.forEach(b=>b.disabled=true);if(i===d.c){e.classList.add("correct");document.getElementById("f"+n).innerHTML='<div class="feedback"><b>✅ ¡Correcto!</b><p>'+d.t+'</p><button class="btn" onclick="go('+d.n+')">CONTINUAR →</button></div>'}else{e.classList.add("wrong");document.getElementById("f"+n).innerHTML='<div class="feedback bad"><b>❌ Aún no.</b><p>Lee nuevamente la situación y piensa cuál de los derechos o componentes de Escazú responde directamente al problema.</p><button class="btn secondary" onclick="render('+n+')">VOLVER A INTENTAR</button></div>'}}
+function finalChoice(t){let m={info:"La información es una base para comprender qué sucede y participar de manera significativa.",part:"La participación permite intervenir en procesos de toma de decisiones relacionadas con el ambiente.",justice:"La justicia ambiental permite buscar protección cuando los derechos de acceso no son respetados.",protect:"La protección de quienes defienden el ambiente es presentada en el material como un componente específico de la democracia ambiental."};document.getElementById("final").innerHTML='<div class="feedback"><b>Tu elección</b><p>'+m[t]+'</p><p><b>Idea clave:</b> estos caminos no funcionan de manera aislada; juntos ayudan a comprender la democracia ambiental.</p></div>';document.getElementById("restart").style.display="inline-block"}
+function restart(){document.getElementById("restart").style.display="none";document.getElementById("final").innerHTML="";go(0)}
+</script>
+</body>
+</html>
